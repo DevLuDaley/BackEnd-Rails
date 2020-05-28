@@ -1,0 +1,27 @@
+
+<section class="main">
+    <% if RecordingSession.all.blank? %>
+    <h2>There are currently no recording sessions scheduled.</h2>
+
+    <!-- <%elsif @recording_sessions == nil %> -->
+    <!-- render /recording_sessions index form -->
+    <!-- <%= render 'index_form', form: @recording_session %> -->
+    <!-- <p>"NOT NESTED"</p> -->
+    <% else %>
+    <!-- render nested index form i.e   -->
+    <%= render 'index_nested', form: @recording_session %>
+<BR>
+
+<p> <% end %> </p>
+       <!-- END OF INDEX FORM -->
+    <!-- USED in views/RecordingSessions/index -->
+    <!-- EDIT FORM -->
+    <!-- DISPLAY recording_session.ALL -->
+
+
+    <p>
+        <%= link_to 'Create New Session', new_recording_session_path %> |
+        <%= link_to 'Create New Studio', new_studio_path %> |
+        <%= link_to 'Create New Artist', new_artist_path %> |
+        <%= link_to 'Create New Engineer', new_engineer_path %>
+    </p>

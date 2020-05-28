@@ -1,0 +1,72 @@
+<%= form_for @recording_session do |p| %>
+
+<h2>Edit Session</h2>
+<h4>Use the dropdown menus below:</h4>
+<!-- Errors MESSAGING -->
+<%if @recording_session.errors.any? %>
+<div id="error_explanation">
+    <h2>
+        <%= pluralize(@recording_session.errors.count, "error") %>
+        prohibited this item from being saved:
+        <% @recording_session.errors.full_messages.each do |msg| %>
+    </h2>
+    <ul style="list-style: none;">
+        <li>
+            <div class="alert alert-danger"><%= msg %></div>
+        </li>
+        <% end %>
+        <% end %>
+    </ul>
+
+
+    <!-- EDIT FORM -->
+    <h5> 
+        <label>Session Date:</label><br>
+        <%= p.datetime_field(:appointment_date, {:class => 'form-control'}) %>
+        <br>
+        <br>
+        <%= p.select :status, [['Complete', true], ['Incomplete', false]] %>
+
+        <br>
+        <br>
+
+        <label>Studio Location:</label><br>
+        <%= select("recording_session", "studio_id", @studios.collect {|p| [ p.name, p.location, p.id] }, {prompt: 'Book Studio'}) %>
+
+        <br>
+        <br>
+
+        <label>Recording Engineer:</label><br>
+        <%= select("recording_session", "engineer_id", @engineers.collect {|p| [ p.name, p.id] }, {prompt: 'Assign Engineer'}) %>
+
+        <br>
+        <br>
+
+        <label>Recording Artist:</label><br>
+        <%= select("recording_session", "artist_id", @artists.collect {|p| [ p.name, p.id] }, {prompt: 'Select Artist'} ) %>
+        <br>
+        <br>
+        <br> 
+     
+
+        <%= p.submit({:class => 'btn btn-primary'}) %>
+        <% end %>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <button> <%= link_to "Delete", recording_session_path(@recording_session), 
+                                     method: :delete, 
+                                     data: {confirm: 'Are you sure you want to delete this session?'},
+                                     :class => 'btn btn-default' %>
+        </button>
+        </h4>
+        <!-- END OF EDIT FORM -->
+
+
+
+            <p> <%= link_to 'Create New Studio', new_studio_path %> |
+                <%= link_to 'Create New Session', new_recording_session_path %> |
+                <%= link_to 'Create New Artist', new_artist_path %> |
+                <%= link_to 'Create New Engineer', new_engineer_path %> 

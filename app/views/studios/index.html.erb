@@ -1,0 +1,49 @@
+<!-- USED in views/Recording_Sessions/index -->
+
+<!-- EDIT FORM -->
+<!-- DISPLAY recording_session.ALL -->
+<section class="main">
+<body>
+
+    <!-- RECORDING SESSION INFO -->
+    <div>
+        <% if @studios.blank? %>
+        <h2>There are currently no recording sessions scheduled.</h2>
+        <% else %>
+        <h2>Scheduled Sessions</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Studio</th>
+                    <th>Location</th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+
+            <% @studios.each do |c| %>
+            <div class="well">
+                <tbody>
+                    <tr>
+                        <td><%= link_to c.id, studio_path(c)%></td>
+                        <td><%= link_to c.name.capitalize, studio_path(c) %></a></td>
+                        <td><%= link_to c.location.capitalize, studio_path(c)%></td>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% end %>
+                </tbody>
+        </table>
+
+                    <!-- URL LINKS -->
+                    
+                    <br>
+                    <p>
+                        <%= link_to 'Create New Session', new_recording_session_path %> |
+                        <%= link_to 'Create New Studio', new_studio_path %> |
+                        <%= link_to 'Create New Artist', new_artist_path %> |
+                        <%= link_to 'Create New Engineer', new_engineer_path %>
+                    </p>
+                    </td>
+                    </p>
